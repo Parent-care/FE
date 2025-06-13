@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/auth/check', {
+        const response = await fetch('be-production-0885.up.railway.app/api/auth/check', {
           credentials: 'include',
         });
         
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const logout = async () => {
     try {
-      await fetch('http://localhost:4000/api/auth/logout', {
+      await fetch('be-production-0885.up.railway.app/api/auth/logout', {
         method: 'POST',
         credentials: 'include',
       });
