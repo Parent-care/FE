@@ -18,7 +18,6 @@ export default function RegisterPage() {
     // Add Google registration logic here
     console.log('Google registration clicked');
   };
-   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -35,8 +34,6 @@ export default function RegisterPage() {
       alert('Konfirmasi password tidak cocok');
       return;
     }
-
-    setLoading(true);
 
     try {
       const res = await fetch('http://localhost:4000/api/auth/register', {
@@ -68,8 +65,6 @@ export default function RegisterPage() {
     } catch (error) {
       console.error(error);
       alert('Terjadi kesalahan koneksi');
-    } finally {
-      setLoading(false);
     }
   };
 

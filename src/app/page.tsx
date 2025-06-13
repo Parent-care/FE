@@ -4,7 +4,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { useState } from "react";
-import { useAuth } from '../components/hook/useAuth';
 interface Testimonial {
   id: number;
   name: string;
@@ -117,7 +116,6 @@ export default function Home() {
   const handleDeleteTestimonial = (id: number) => {
     setTestimonials(prev => prev.filter(testimonial => testimonial.id !== id));
   };
-   const { user, loading } = useAuth();
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -363,7 +361,7 @@ export default function Home() {
                   </div>
                   
                   <p className="text-gray-700 leading-relaxed italic mb-4">
-                    "{testimonial.content}"
+                    {testimonial.content}
                   </p>
                   
                   <div className="flex text-yellow-400">
