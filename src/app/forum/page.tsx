@@ -32,7 +32,7 @@ export default function ForumList() {
   const fetchPosts = async () => {
     setIsLoading(true); // Set loading ke true sebelum fetch
     try {
-      const res = await axios.get<Post[]>('http://localhost:4000/api/forum', {
+      const res = await axios.get<Post[]>('be-production-0885.up.railway.app/api/forum', {
         withCredentials: true
       });
       setPosts(res.data);
@@ -66,7 +66,7 @@ export default function ForumList() {
 
     try {
       await axios.post(
-        'http://localhost:4000/api/forum',
+        'be-production-0885.up.railway.app/api/forum',
         {
           nama_lengkap: user.nama_lengkap,
           topic,
@@ -98,7 +98,7 @@ export default function ForumList() {
 
     try {
       await axios.post(
-        `http://localhost:4000/api/forum/${postId}/answer`,
+        `be-production-0885.up.railway.app/api/forum/${postId}/answer`,
         { answer },
         { withCredentials: true }
       );
