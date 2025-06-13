@@ -28,45 +28,45 @@ export default function RegisterPage() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      alert('Konfirmasi password tidak cocok');
-      return;
-    }
+  if (formData.password !== formData.confirmPassword) {
+    alert('Konfirmasi password tidak cocok');
+    return;
+  }
 
-    try {
-      const res = await fetch('http://localhost:4000/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          namaLengkap: formData.namaLengkap,
-          email: formData.email,
-          password: formData.password
-        })
+  try {
+    const res = await fetch('https://be-production-0885.up.railway.app/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        namaLengkap: formData.namaLengkap,
+        email: formData.email,
+        password: formData.password
+      })
+    });
+
+    const result = await res.json();
+
+    if (!res.ok) {
+      alert(result.message || 'Registrasi gagal');
+    } else {
+      alert('Registrasi berhasil!');
+      setFormData({
+        namaLengkap: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
       });
-
-      const result = await res.json();
-
-      if (!res.ok) {
-        alert(result.message || 'Registrasi gagal');
-      } else {
-        alert('Registrasi berhasil!');
-        // Reset form
-        setFormData({
-          namaLengkap: '',
-          email: '',
-          password: '',
-          confirmPassword: ''
-        });
-      }
-    } catch (error) {
-      console.error(error);
-      alert('Terjadi kesalahan koneksi');
     }
-  };
+  } catch (error) {
+    console.error(error);
+    alert('Terjadi kesalahan koneksi');
+  }
+};
+
 
   return (
     <div className="min-h-screen flex">

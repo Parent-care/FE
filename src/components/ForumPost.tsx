@@ -3,15 +3,15 @@ import { useState } from 'react';
 interface Answer {
   id: string;
   nama_lengkap: string;
-  answer: string;
   username: string;
+  answer: string;
   created_at: string;
 }
 
 interface ForumPostProps {
   id: string;
   content: string;
-  topic?: string; // Optional topic
+  topic?: string; // Menambahkan topic
   nama_lengkap: string;
   answers: Answer[];
   onAddAnswer: (postId: string, answer: string) => void;
@@ -44,13 +44,12 @@ const ForumPost = ({ id, content, topic, nama_lengkap, answers, onAddAnswer }: F
         <button
           className="mt-2 bg-blue-500 text-white px-4 py-1 rounded"
           onClick={handleSubmit}
-          disabled={answerText.trim() === ''}
         >
           Kirim
         </button>
       </div>
 
-      {answers.length > 0 ? (
+      {answers.length > 0 && (
         <div className="mt-3">
           <p className="text-sm font-bold">Jawaban:</p>
           {answers.map((a) => (
@@ -59,8 +58,6 @@ const ForumPost = ({ id, content, topic, nama_lengkap, answers, onAddAnswer }: F
             </p>
           ))}
         </div>
-      ) : (
-        <p className="text-sm text-gray-500 mt-2">Belum ada jawaban.</p>
       )}
     </div>
   );

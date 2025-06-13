@@ -441,7 +441,7 @@ const ParentMatchQuiz: React.FC = () => {
     setIsLoading(true);
     const finalScores = questions.map(q => answers[q.id]?.score ?? 0);
     try {
-      const res = await fetch('be-production-0885.up.railway.app/api/parentmatch', {
+      const res = await fetch('https://be-production-0885.up.railway.app/api/parentmatch', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ scores: finalScores })

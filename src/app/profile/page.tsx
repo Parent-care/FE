@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
 type ProfileResponse = {
   isLoggedIn: boolean;
   user: {
@@ -9,6 +11,9 @@ type ProfileResponse = {
     email: string;
   };
 };
+
+// Gunakan ENV agar mudah ubah antara dev/prod
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://be-production-0885.up.railway.app';
 
 const ProfilePage = () => {
   const [user, setUser] = useState<ProfileResponse['user'] | null>(null);
@@ -19,7 +24,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const res = await fetch('be-production-0885.up.railway.app/api/auth/me', {
+        const res = await fetch(`${BASE_URL}/api/auth/me`, {
           credentials: 'include',
         });
         if (res.ok) {
@@ -45,32 +50,32 @@ const ProfilePage = () => {
   };
 
   const handleSave = async () => {
-  try {
-    const res = await fetch('be-production-0885.up.railway.app/api/auth/me', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include', // penting agar cookie dikirim
-      body: JSON.stringify({
-        namaLengkap: formData.nama_lengkap,
-        email: formData.email,
-      }),
-    });
+    try {
+      const res = await fetch(`${BASE_URL}/api/auth/me`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          namaLengkap: formData.nama_lengkap,
+          email: formData.email,
+        }),
+      });
 
-    if (!res.ok) {
-      throw new Error('Gagal menyimpan data');
+      if (!res.ok) {
+        throw new Error('Gagal menyimpan data');
+      }
+
+      const data = await res.json();
+      console.log(data);
+      setStatusMessage('Profil berhasil diperbarui');
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Request gagal', error);
+      setStatusMessage('Gagal menyimpan data');
     }
-
-    const data = await res.json();
-    console.log(data);
-    setStatusMessage('Profil berhasil diperbarui');
-    setIsEditing(false);
-  } catch (error) {
-    console.error('Request gagal', error);
-    setStatusMessage('Gagal menyimpan data');
-  }
-};
+  };
 
   if (!user) {
     return (
@@ -84,28 +89,20 @@ const ProfilePage = () => {
     <main className="min-h-screen bg-gradient-to-br from-pink-50 via-orange-50 to-purple-100 py-12">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-            Profil Pengguna
-          </h1>
-          <p className="text-gray-600 mt-2">
-            Kelola informasi dan aktivitas Anda
-          </p>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Profil Pengguna</h1>
+          <p className="text-gray-600 mt-2">Kelola informasi dan aktivitas Anda</p>
         </div>
 
         <div className="max-w-3xl mx-auto bg-white/80 backdrop-blur-lg shadow-xl rounded-xl p-8">
           {statusMessage && (
-            <p className={`text-center text-sm mb-4 ${
-              statusMessage.includes('berhasil') ? 'text-green-600' : 'text-red-600'
-            }`}>
+            <p className={`text-center text-sm mb-4 ${statusMessage.includes('berhasil') ? 'text-green-600' : 'text-red-600'}`}>
               {statusMessage}
             </p>
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h2 className="text-xl font-semibold text-gray-700 mb-2">
-                Nama Lengkap
-              </h2>
+              <h2 className="text-xl font-semibold text-gray-700 mb-2">Nama Lengkap</h2>
               {isEditing ? (
                 <input
                   type="text"

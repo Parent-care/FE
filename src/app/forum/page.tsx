@@ -23,23 +23,26 @@ interface Post {
   forum_answers: Answer[];
 }
 
+// Ganti dengan domain produksi Railway
+const API_BASE_URL = 'https://be-production-0885.up.railway.app';
+
 export default function ForumList() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [search, setSearch] = useState('');
   const { user, loading } = useAuth();
-  const [isLoading, setIsLoading] = useState(false); // Menambahkan state loading
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchPosts = async () => {
-    setIsLoading(true); // Set loading ke true sebelum fetch
+    setIsLoading(true);
     try {
-      const res = await axios.get<Post[]>('be-production-0885.up.railway.app/api/forum', {
-        withCredentials: true
+      const res = await axios.get<Post[]>(`${API_BASE_URL}/api/forum`, {
+        withCredentials: true,
       });
       setPosts(res.data);
     } catch (error) {
       console.error('Gagal mengambil data post', error);
     } finally {
-      setIsLoading(false); // Set loading ke false setelah fetch selesai
+      setIsLoading(false);
     }
   };
 
@@ -62,11 +65,11 @@ export default function ForumList() {
       return alert('Topic dan konten tidak boleh kosong!');
     }
 
-    setIsLoading(true); // Set loading ke true saat mengirimkan post
+    setIsLoading(true);
 
     try {
       await axios.post(
-        'be-production-0885.up.railway.app/api/forum',
+        `${API_BASE_URL}/api/forum`,
         {
           nama_lengkap: user.nama_lengkap,
           topic,
@@ -84,7 +87,7 @@ export default function ForumList() {
       console.error('Gagal membuat post', error);
       alert('Gagal membuat post, mungkin token tidak valid');
     } finally {
-      setIsLoading(false); // Set loading ke false setelah proses selesai
+      setIsLoading(false);
     }
   };
 
@@ -98,9 +101,14 @@ export default function ForumList() {
 
     try {
       await axios.post(
-        `be-production-0885.up.railway.app/api/forum/${postId}/answer`,
+        `${API_BASE_URL}/api/forum/${postId}/answer`,
         { answer },
-        { withCredentials: true }
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
       );
       fetchPosts();
     } catch (error) {
@@ -117,7 +125,9 @@ export default function ForumList() {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Forum Diskusi</h1>
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+        Forum Diskusi
+      </h1>
 
       <NewPostForm onAddPost={handleAddPost} />
 
