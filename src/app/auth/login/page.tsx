@@ -172,16 +172,15 @@ console.log('Response Body:', result);
                 </Link>
               </div>
 
-              {/* Submit Button */}
-              <button
+                           <button
                 type="submit"
                 className="w-full text-white py-3 px-4 rounded-lg font-semibold focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
-                style={{ 
-                  background: 'linear-gradient(135deg, #FFBFA3 0%, #FFF6A3 100%)'
-                }}
+                style={{ background: 'linear-gradient(to right, #FFBFA3, #FFF6A3)' }}
               >
-                Log in
+                Masuk
               </button>
+
+              
 
               {/* Divider */}
               <div className="relative my-6">
