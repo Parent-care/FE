@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-
 type ProfileResponse = {
   isLoggedIn: boolean;
   user: {
@@ -20,7 +19,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const res = await fetch('http://localhost:4000/api/auth/me', {
+        const res = await fetch('be-production-0885.up.railway.app/api/auth/me', {
           credentials: 'include',
         });
         if (res.ok) {
@@ -47,7 +46,7 @@ const ProfilePage = () => {
 
   const handleSave = async () => {
   try {
-    const res = await fetch('http://localhost:4000/api/auth/me', {
+    const res = await fetch('be-production-0885.up.railway.app/api/auth/me', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
