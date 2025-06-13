@@ -23,7 +23,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch('https://be-production-0885.up.railway.app/api/auth/login', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -114,7 +114,7 @@ console.log('Response Body:', result);
             {/* Header */}
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-gray-800 mb-2">Log in</h2>
-              <p className="text-gray-600">Masuk ke akun ParentCare Anda</p>
+              <p className="text-gray-600">Masuk ke akun ParentCare Anda Bro</p>
             </div>
 
             {/* Form */}
