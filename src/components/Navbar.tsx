@@ -1,13 +1,14 @@
-// src/components/Navbar.tsx
 'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
+import { useAuth } from '../components/hook/useAuth';  // Pastikan import useAuth
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { user, loading } = useAuth();  // Ambil user dan loading dari useAuth
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -23,25 +24,15 @@ const Navbar = () => {
     };
   }, []);
 
-  // Mock authentication state - replace with your actual auth system
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Change this based on your auth state
-  
-  // Mock user data - replace with actual user data from your auth system
-  const user = {
-    name: "John Doe",
-    email: "john@example.com",
-    avatar: "/api/placeholder/40/40" // Replace with actual avatar URL
-  };
-
+  // Logika untuk render berdasarkan status user
   const handleLogout = () => {
-    // Add your logout logic here
-    setIsLoggedIn(false);
+    // Tambahkan logika logout di sini
     console.log("Logout clicked");
-    setIsDropdownOpen(false);
+    // Redirect ke halaman login atau lakukan reset token jika diperlukan
   };
 
   return (
-    <nav className="bg-[#FFE0D7] p-4 shadow">
+    <nav className="bg-[#FFE0D7] p-4 shadow fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo dan Brand */}
         <Link href="/" className="flex items-center space-x-3">
@@ -71,13 +62,15 @@ const Navbar = () => {
             <Link href="/forum" className="text-gray-800 hover:text-orange-500 transition-colors">
               Forum
             </Link>
-            <Link href="/about" className="text-gray-800 hover:text-orange-500 transition-colors">
+            <Link href="/About" className="text-gray-800 hover:text-orange-500 transition-colors">
               About Us
             </Link>
           </div>
 
           {/* Authentication Section */}
-          {isLoggedIn ? (
+          {loading ? (
+            <div>Loading...</div>  // Menampilkan loading jika data user masih dalam proses
+          ) : user ? (
             /* Account Dropdown - When User is Logged In */
             <div className="relative" ref={dropdownRef}>
               <button
@@ -85,10 +78,10 @@ const Navbar = () => {
                 className="flex items-center space-x-2 p-2 rounded-full hover:bg-orange-200 transition-colors"
               >
                 <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold">
-                  {user.name.charAt(0)}
+                  {user.nama_lengkap.charAt(0)}
                 </div>
                 <span className="hidden md:block text-gray-800 font-medium">
-                  {user.name}
+                  {user.nama_lengkap}
                 </span>
                 <svg
                   className={`w-4 h-4 text-gray-600 transition-transform ${
@@ -109,10 +102,10 @@ const Navbar = () => {
                   <div className="px-4 py-3 border-b border-gray-100">
                     <div className="flex items-center space-x-3">
                       <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold">
-                        {user.name.charAt(0)}
+                        {user.nama_lengkap.charAt(0)}
                       </div>
                       <div>
-                        <p className="font-medium text-gray-900">{user.name}</p>
+                        <p className="font-medium text-gray-900">{user.nama_lengkap}</p>
                         <p className="text-sm text-gray-500">{user.email}</p>
                       </div>
                     </div>
@@ -149,50 +142,43 @@ const Navbar = () => {
                       onClick={() => setIsDropdownOpen(false)}
                     >
                       <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v12m6-6H6" />
                       </svg>
-                      Riwayat Konsultasi
+                      History Konsultasi
                     </Link>
-                    
-                    <hr className="my-1 border-gray-100" />
-                    
-                    <button
-                      onClick={handleLogout}
-                      className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
-                    >
-                      <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                      </svg>
-                      Keluar
-                    </button>
+
+                    <div className="border-t border-gray-100">
+                      <button
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                        onClick={handleLogout}
+                      >
+                        <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H3" />
+                        </svg>
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
             </div>
           ) : (
-            /* Login Button - When User is NOT Logged In */
-            <div className="flex items-center space-x-3">
+            /* When Not Logged In */
+            <div className="flex space-x-6">
               <Link
-                href="/auth/login"
-                className="px-4 py-2 text-gray-800 hover:text-orange-500 transition-colors font-medium"
+                href="auth/login"
+                 className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-orange-600 transition-colors font-medium"
               >
-                Masuk
+                Login
               </Link>
               <Link
-                href="/auth/register"
-                className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors font-medium"
+                href="auth/register"
+                 className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium"
               >
-                Daftar
+                Register
               </Link>
             </div>
           )}
-
-          {/* Mobile Menu Button */}
-          <button className="md:hidden text-gray-800">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
         </div>
       </div>
     </nav>
