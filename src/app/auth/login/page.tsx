@@ -172,13 +172,13 @@ console.log('Response Body:', result);
                 </Link>
               </div>
 
-                           <button
-                type="submit"
-                className="w-full text-white py-3 px-4 rounded-lg font-semibold focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
-                style={{ background: 'linear-gradient(to right, #FFBFA3, #FFF6A3)' }}
-              >
-                Masuk
-              </button>
+                          <button
+  type="submit"
+  className="w-full text-white py-3 px-4 rounded-lg font-semibold focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
+  style={{ background: 'linear-gradient(to right, #FFBFA3, #FFF6A3)' }}
+>
+  Masuk
+</button>
 
               
 
