@@ -361,7 +361,7 @@ export default function Home() {
                   </div>
                   
                   <p className="text-gray-700 leading-relaxed italic mb-4">
-                    {testimonial.content}
+                    "{testimonial.content}"
                   </p>
                   
                   <div className="flex text-yellow-400">

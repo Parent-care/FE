@@ -23,7 +23,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/login`, {
+      const res = await fetch('https://be-production-0885.up.railway.app/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -114,7 +114,7 @@ console.log('Response Body:', result);
             {/* Header */}
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-gray-800 mb-2">Log in</h2>
-              <p className="text-gray-600">Masuk ke akun ParentCare Anda Brok</p>
+              <p className="text-gray-600">Masuk ke akun ParentCare Anda</p>
             </div>
 
             {/* Form */}
@@ -172,15 +172,16 @@ console.log('Response Body:', result);
                 </Link>
               </div>
 
-                          <button
-  type="submit"
-  className="w-full text-white py-3 px-4 rounded-lg font-semibold focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
-  style={{ background: 'linear-gradient(to right, #FFBFA3, #FFF6A3)' }}
->
-  Masuk
-</button>
-
-              
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full text-white py-3 px-4 rounded-lg font-semibold focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
+                style={{ 
+                  background: 'linear-gradient(135deg, #FFBFA3 0%, #FFF6A3 100%)'
+                }}
+              >
+                Log in
+              </button>
 
               {/* Divider */}
               <div className="relative my-6">
