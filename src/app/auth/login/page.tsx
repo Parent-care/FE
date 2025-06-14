@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/router'; // Gunakan useRouter untuk redirect
+import { useRouter } from 'next/router'; // Use useRouter for redirect
 import Link from 'next/link';
-import { GoogleLogin } from '@react-oauth/google'; // Impor komponen GoogleLogin
+import { GoogleLogin, CredentialResponse } from '@react-oauth/google'; // Import the necessary types from '@react-oauth/google'
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -12,7 +12,7 @@ export default function LoginPage() {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter(); // Gunakan router untuk redirect
+  const router = useRouter(); // Use router for redirect
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -32,7 +32,7 @@ export default function LoginPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: formData.email, // Menggunakan email sebagai username
+          username: formData.email, // Using email as username
           password: formData.password,
         }),
       });
@@ -41,25 +41,26 @@ export default function LoginPage() {
       console.log('Response Body:', result);
 
       if (!res.ok) {
-        alert(result.message || 'Login gagal');
+        alert(result.message || 'Login failed');
       } else {
-        // Simpan token JWT setelah login berhasil
-        localStorage.setItem('jwtToken', result.token); // Simpan token ke localStorage
+        // Save JWT token after successful login
+        localStorage.setItem('jwtToken', result.token); // Save token to localStorage
 
-        alert('Login berhasil!');
-        router.push('/'); // Menggunakan router.push untuk redirect ke halaman utama
+        alert('Login successful!');
+        router.push('/'); // Redirect to home page
       }
 
     } catch (error) {
       console.error(error);
-      alert('Terjadi kesalahan saat login');
+      alert('An error occurred while logging in');
     }
   };
 
-const handleGoogleLogin = (response: any) => {
-  // Logika untuk menangani Google login response
-  console.log(response);
-};
+  // Define a proper type for the response
+  const handleGoogleLogin = (response: CredentialResponse) => {
+    console.log(response);
+    // You can handle the Google login response here
+  };
 
   return (
     <div className="min-h-screen flex">
@@ -172,8 +173,8 @@ const handleGoogleLogin = (response: any) => {
                 </button>
               </div>
               <GoogleLogin
-                onSuccess={handleGoogleLogin} // Gunakan handleGoogleLogin
-                onError={() => console.log('Login gagal')}
+                onSuccess={handleGoogleLogin} // Use handleGoogleLogin
+                onError={() => console.log('Login failed')}
                 useOneTap
                 theme="outline"
                 text="signin_with"
