@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const ArticleCard = ({
   title,
   date,
@@ -17,7 +19,7 @@ const ArticleCard = ({
     <div className="bg-white p-4 rounded-lg shadow-md mb-4">
       {/* Menambahkan gambar jika ada */}
       {imageUrl && (
-        <img
+        <Image
           src={imageUrl}
           alt={title}
           className="w-full h-auto object-cover rounded-t-lg mb-4" // Gambar akan responsif
