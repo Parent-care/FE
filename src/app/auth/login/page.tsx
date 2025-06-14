@@ -55,11 +55,6 @@ export default function LoginPage() {
     }
   };
 
-  const handleGoogleLogin = () => {
-    // Add Google login logic here
-    console.log('Google login clicked');
-  };
-
   return (
     <div className="min-h-screen flex">
       {/* Left Side - Branding */}
