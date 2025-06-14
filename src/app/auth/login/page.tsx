@@ -23,17 +23,22 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch('https://be-production-0885.up.railway.app/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include', // ⬅️ penting untuk kirim & terima cookie
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password
-        })
-      });
+      fetch('https://be-production-0885.up.railway.app/api/auth/login', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${jwtToken}`, // Jika menggunakan token autentikasi
+  },
+  body: JSON.stringify({
+    username: 'example',
+    password: 'example',
+  }),
+  credentials: 'include', // Agar cookies atau kredensial lainnya dikirim
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+
 
       console.log('Status:', res.status);
 console.log('Response Headers:', res.headers);
@@ -114,7 +119,7 @@ console.log('Response Body:', result);
             {/* Header */}
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-gray-800 mb-2">Log in</h2>
-              <p className="text-gray-600">Masuk ke akun ParentCare Anda</p>
+              <p className="text-gray-600">Masuk ke akun ParentCare Anda brok</p>
             </div>
 
             {/* Form */}
