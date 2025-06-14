@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router'; // Gunakan useRouter untuk redirect
 import Link from 'next/link';
+import { GoogleLogin } from '@react-oauth/google'; // Impor komponen GoogleLogin
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -55,10 +56,10 @@ export default function LoginPage() {
     }
   };
 
-  const handleGoogleLogin = () => {
-    // Add Google login logic here
-    console.log('Google login clicked');
-  };
+const handleGoogleLogin = (response: any) => {
+  // Logika untuk menangani Google login response
+  console.log(response);
+};
 
   return (
     <div className="min-h-screen flex">
@@ -170,6 +171,14 @@ export default function LoginPage() {
                   Login
                 </button>
               </div>
+              <GoogleLogin
+                onSuccess={handleGoogleLogin} // Gunakan handleGoogleLogin
+                onError={() => console.log('Login gagal')}
+                useOneTap
+                theme="outline"
+                text="signin_with"
+                shape="rectangular"
+              />
 
               {/* Link to Register */}
               <div className="text-center mt-4">
