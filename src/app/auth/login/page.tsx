@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'; // Use useRouter for redirect
 import Link from 'next/link';
 import { GoogleLogin, CredentialResponse } from '@react-oauth/google'; // Import the necessary types from '@react-oauth/google'
@@ -12,7 +12,13 @@ export default function LoginPage() {
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [isClient, setIsClient] = useState(false); // Client-side check
   const router = useRouter(); // Use router for redirect
+
+  // Ensure the component is only running on the client-side
+  useEffect(() => {
+    setIsClient(true); // Set to true once the component is mounted on the client side
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -61,6 +67,10 @@ export default function LoginPage() {
     console.log(response);
     // You can handle the Google login response here
   };
+
+  if (!isClient) {
+    return null; // Avoid rendering the component during SSR (server-side rendering)
+  }
 
   return (
     <div className="min-h-screen flex">
