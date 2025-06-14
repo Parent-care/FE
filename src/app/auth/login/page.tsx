@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router'; // Import useRouter for redirection
+import { useState } from 'react';
+import { useRouter } from 'next/router'; // Gunakan useRouter untuk redirect
 import Link from 'next/link';
-import { GoogleLogin, CredentialResponse } from '@react-oauth/google'; // Import types for GoogleLogin
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -12,13 +11,7 @@ export default function LoginPage() {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const [isClient, setIsClient] = useState(false); // Track client-side mount
-  const router = useRouter(); // Use useRouter for redirection
-
-  // Ensure the router is only accessed after the component is mounted on the client
-  useEffect(() => {
-    setIsClient(true); // Mark the component as mounted on the client side
-  }, []);
+  const router = useRouter(); // Gunakan router untuk redirect
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -38,7 +31,7 @@ export default function LoginPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: formData.email, // Using email as username
+          username: formData.email, // Menggunakan email sebagai username
           password: formData.password,
         }),
       });
@@ -47,30 +40,25 @@ export default function LoginPage() {
       console.log('Response Body:', result);
 
       if (!res.ok) {
-        alert(result.message || 'Login failed');
+        alert(result.message || 'Login gagal');
       } else {
-        // Save JWT token after successful login
-        localStorage.setItem('jwtToken', result.token); // Save token to localStorage
+        // Simpan token JWT setelah login berhasil
+        localStorage.setItem('jwtToken', result.token); // Simpan token ke localStorage
 
-        alert('Login successful!');
-        router.push('/'); // Redirect to home page
+        alert('Login berhasil!');
+        router.push('/'); // Menggunakan router.push untuk redirect ke halaman utama
       }
 
     } catch (error) {
       console.error(error);
-      alert('An error occurred while logging in');
+      alert('Terjadi kesalahan saat login');
     }
   };
 
-  const handleGoogleLogin = (response: CredentialResponse) => {
-    console.log(response);
-    // Handle Google login response here
+  const handleGoogleLogin = () => {
+    // Add Google login logic here
+    console.log('Google login clicked');
   };
-
-  // Don't render the component on the server (during SSR or SSG)
-  if (!isClient) {
-    return null; // Prevent rendering during static generation or SSR
-  }
 
   return (
     <div className="min-h-screen flex">
@@ -182,14 +170,6 @@ export default function LoginPage() {
                   Login
                 </button>
               </div>
-              <GoogleLogin
-                onSuccess={handleGoogleLogin} // Use handleGoogleLogin
-                onError={() => console.log('Login failed')}
-                useOneTap
-                theme="outline"
-                text="signin_with"
-                shape="rectangular"
-              />
 
               {/* Link to Register */}
               <div className="text-center mt-4">
