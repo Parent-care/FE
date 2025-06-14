@@ -21,30 +21,30 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const jwtToken = localStorage.getItem('jwtToken'); // Pastikan token sudah disimpan saat login sebelumnya
+
+    if (!jwtToken) {
+      alert('Token tidak ditemukan! Harap login terlebih dahulu.');
+      window.location.href = '/login'; // Arahkan ke halaman login jika token tidak ada
+      return;
+    }
 
     try {
-      fetch('https://be-production-0885.up.railway.app/api/auth/login', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${jwtToken}`, // Jika menggunakan token autentikasi
-  },
-  body: JSON.stringify({
-    username: 'example',
-    password: 'example',
-  }),
-  credentials: 'include', // Agar cookies atau kredensial lainnya dikirim
-})
-.then(response => response.json())
-.then(data => console.log(data))
-.catch(error => console.error('Error:', error));
+      const res = await fetch('https://be-production-0885.up.railway.app/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${jwtToken}`, // Menggunakan token untuk autentikasi
+        },
+        body: JSON.stringify({
+          username: formData.email, // Menggunakan email untuk username
+          password: formData.password,
+        }),
+        credentials: 'include', // Agar cookies atau kredensial lainnya dikirim
+      });
 
-
-      console.log('Status:', res.status);
-console.log('Response Headers:', res.headers);
-
-const result = await res.json();
-console.log('Response Body:', result);
+      const result = await res.json();
+      console.log('Response Body:', result);
 
       if (!res.ok) {
         alert(result.message || 'Login gagal');
