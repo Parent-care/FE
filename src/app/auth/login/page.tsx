@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router'; // Use useRouter for redirect
+import { useRouter } from 'next/router'; // Import useRouter for redirection
 import Link from 'next/link';
-import { GoogleLogin, CredentialResponse } from '@react-oauth/google'; // Import the necessary types from '@react-oauth/google'
+import { GoogleLogin, CredentialResponse } from '@react-oauth/google'; // Import types for GoogleLogin
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -12,12 +12,12 @@ export default function LoginPage() {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const [isClient, setIsClient] = useState(false); // Client-side check
-  const router = useRouter(); // Use router for redirect
+  const [isClient, setIsClient] = useState(false); // Track client-side mount
+  const router = useRouter(); // Use useRouter for redirection
 
-  // Ensure the component is only running on the client-side
+  // Ensure the router is only accessed after the component is mounted on the client
   useEffect(() => {
-    setIsClient(true); // Set to true once the component is mounted on the client side
+    setIsClient(true); // Mark the component as mounted on the client side
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,14 +62,14 @@ export default function LoginPage() {
     }
   };
 
-  // Define a proper type for the response
   const handleGoogleLogin = (response: CredentialResponse) => {
     console.log(response);
-    // You can handle the Google login response here
+    // Handle Google login response here
   };
 
+  // Don't render the component on the server (during SSR or SSG)
   if (!isClient) {
-    return null; // Avoid rendering the component during SSR (server-side rendering)
+    return null; // Prevent rendering during static generation or SSR
   }
 
   return (
