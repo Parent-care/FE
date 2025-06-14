@@ -5,12 +5,12 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '../../../components/auth.context';
 
 export default function LogoutPage() {
-  const { logout } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
     const performLogout = async () => {
       try {
+        const { logout } = useAuth(); // ⬅️ Pindah ke sini agar tidak dijalankan saat prerender
         await logout();
         router.push('/');
       } catch (error) {
@@ -20,7 +20,7 @@ export default function LogoutPage() {
     };
 
     performLogout();
-  }, [logout, router]);
+  }, [router]);
 
   return <div>Logging out...</div>;
 }
