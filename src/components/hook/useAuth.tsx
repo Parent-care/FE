@@ -3,7 +3,6 @@ import { User, AuthResponse } from '../../app/type';
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
 useEffect(() => {
@@ -41,6 +40,6 @@ useEffect(() => {
 }, []);
 
 
-  return { user, loading, token };
+  return { user, loading };
 }
 
