@@ -1,15 +1,24 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
+import { GoogleLogin, CredentialResponse } from '@react-oauth/google'; // Import types for GoogleLogin
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';  // Perhatikan: 'next/navigation' bukan 'next/router'
 
 export default function LoginPage() {
-   const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [isClient, setIsClient] = useState(false);  // State to track client-side rendering
+  const router = useRouter();  // Directly use useRouter
+
+  // Ensure the router is only used in the client-side environment
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -23,41 +32,45 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/login`, {
+      const res = await fetch('https://be-production-0885.up.railway.app/api/auth/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        credentials: 'include', // ⬅️ penting untuk kirim & terima cookie
         body: JSON.stringify({
-          email: formData.email,
-          password: formData.password
-        })
+          username: formData.email, // Using email as username
+          password: formData.password,
+        }),
       });
 
-      console.log('Status:', res.status);
-console.log('Response Headers:', res.headers);
-
-const result = await res.json();
-console.log('Response Body:', result);
+      const result = await res.json();
+      console.log('Response Body:', result);
 
       if (!res.ok) {
-        alert(result.message || 'Login gagal');
+        alert(result.message || 'Login failed');
       } else {
-        alert('Login berhasil!');
-        window.location.href = '/'; // ⬅️ redirect ke home setelah login
+        // Save JWT token after successful login
+        localStorage.setItem('jwtToken', result.token); // Save token to localStorage
+
+        alert('Login successful!');
+        router.push('/'); // Use router directly here
       }
 
     } catch (error) {
       console.error(error);
-      alert('Terjadi kesalahan saat login');
+      alert('An error occurred while logging in');
     }
   };
 
-  const handleGoogleLogin = () => {
-    // Add Google login logic here
-    console.log('Google login clicked');
+  const handleGoogleLogin = (response: CredentialResponse) => {
+    console.log(response);
+    // Handle Google login response here
   };
+
+  // Prevent rendering during SSR/SSG (Ensure it only renders on client-side)
+  if (!isClient) {
+    return null; // Prevent rendering during static generation or SSR
+  }
 
   return (
     <div className="min-h-screen flex">
@@ -113,11 +126,10 @@ console.log('Response Body:', result);
           <div className="bg-white rounded-2xl shadow-xl p-8">
             {/* Header */}
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-800 mb-2">Log in</h2>
-              <p className="text-gray-600">Masuk ke akun ParentCare Anda Bro</p>
+              <h2 className="text-2xl font-semibold">Login</h2>
+              <p className="text-gray-600 text-sm">Please log in to your account</p>
             </div>
-
-            {/* Form */}
+            {/* Login Form */}
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Email */}
               <div>
@@ -151,72 +163,39 @@ console.log('Response Body:', result);
                   {showPassword ? (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
                   ) : (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                   )}
                 </button>
               </div>
 
-              {/* Forgot Password Link */}
-              <div className="text-right">
-                <Link
-                  href="/auth/forgot-password"
-                  className="text-sm font-medium hover:underline"
-                  style={{ color: '#FFBFA3' }}
+              {/* Submit Button */}
+              <div>
+                <button
+                  type="submit"
+                  className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-all duration-200"
                 >
-                  Lupa password?
-                </Link>
+                  Login
+                </button>
               </div>
+              <GoogleLogin
+                onSuccess={handleGoogleLogin} // Use handleGoogleLogin
+                onError={() => console.log('Login failed')}
+                useOneTap
+                theme="outline"
+                text="signin_with"
+                shape="rectangular"
+              />
 
-                          <button
-  type="submit"
-  className="w-full text-white py-3 px-4 rounded-lg font-semibold focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
-  style={{ background: 'linear-gradient(to right, #FFBFA3, #FFF6A3)' }}
->
-  Masuk
-</button>
-
-              
-
-              {/* Divider */}
-              <div className="relative my-6">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-200"></div>
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">or log in with</span>
-                </div>
-              </div>
-
-              {/* Google Login Button */}
-              <button
-                type="button"
-                onClick={handleGoogleLogin}
-                className="w-full flex items-center justify-center gap-3 bg-white border border-gray-200 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-50 focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 transition-all duration-200"
-              >
-                <svg className="w-5 h-5" viewBox="0 0 24 24">
-                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                </svg>
-                Masuk dengan Google
-              </button>
-
-              {/* Register Link */}
-              <div className="text-center pt-4 border-t border-gray-100">
-                <p className="text-sm text-gray-600">
+              {/* Link to Register */}
+              <div className="text-center mt-4">
+                <p className="text-gray-600">
                   Belum punya akun?{' '}
-                  <Link 
-                    href="/auth/register" 
-                    className="font-medium hover:underline"
-                    style={{ color: '#FFBFA3' }}
-                  >
-                    Sign up
+                  <Link href="/auth/register" className="text-blue-500 hover:underline">
+                    Daftar
                   </Link>
                 </p>
               </div>
