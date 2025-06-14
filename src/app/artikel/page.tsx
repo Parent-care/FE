@@ -26,7 +26,7 @@ const Artikel = () => {
     const fetchArticles = async () => {
       try {
         const response = await axios.get<ApiResponse>(
-          `https://newsapi.org/v2/top-headlines?q=parenting&apiKey=8bcc388eba7b4c009b317cf0c317907a`
+          `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=93bbf099c8a496438f454a524f38f7af`
         );
 
         // Debugging: lihat response yang diterima
