@@ -10,7 +10,14 @@ const nextConfig: NextConfig = {
       "media.cnn.com",
       "assets.bwbx.io",
       "media.npr.org",
-      "m.media-amazon.com"
+      "m.media-amazon.com",
+      "abcnews.go.com",
+      "whyy.org",
+      "formula1.com",
+      "crash.net",
+      "pagesix.com",
+      "wtop.com",
+      "aol.com",
     ],
   },
 };
