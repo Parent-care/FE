@@ -20,7 +20,7 @@ export default function TentangKami() {
         {/* Card Section */}
         <section className="grid sm:grid-cols-1 md:grid-cols-2 gap-12">
           {/* Card 1 */}
-          <div className="bg-white rounded-xl shadow-xl p-8 transition-transform transform hover:scale-105 hover:shadow-2xl ease-in-out duration-300">
+          <div className="bg-white rounded-xl shadow-2xl p-8 transition-transform transform hover:scale-105 hover:shadow-2xl ease-in-out duration-300">
             <h2 className="text-3xl font-semibold text-gray-800 mb-4">
               Misi Kami
             </h2>
@@ -30,7 +30,7 @@ export default function TentangKami() {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white rounded-xl shadow-xl p-8 transition-transform transform hover:scale-105 hover:shadow-2xl ease-in-out duration-300">
+          <div className="bg-white rounded-xl shadow-2xl p-8 transition-transform transform hover:scale-105 hover:shadow-2xl ease-in-out duration-300">
             <h2 className="text-3xl font-semibold text-gray-800 mb-4">
               Visi Kami
             </h2>
@@ -44,87 +44,58 @@ export default function TentangKami() {
         <section className="mt-16">
           <h2 className="text-3xl font-semibold text-gray-800 text-center mb-8">Tim Kami</h2>
           
-          {/* Frontend & Backend Developer */}
+          {/* Frontend & Backend Developer Section */}
+          <h3 className="text-2xl font-semibold text-gray-800 mb-6">Frontend & Backend Developer</h3>
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {/* Tim Frontend & Backend */}
-            <div className="bg-white p-6 rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl ease-in-out duration-300">
-              <h3 className="text-2xl font-semibold text-gray-800 mb-4">Frontend & Backend Developer</h3>
-              <ul className="list-disc list-inside text-gray-600 space-y-2">
-                <li>Revan Fazry Huda</li>
-                <li>Moh Syafiq Ade Luwindra</li>
-                <li>Syahrani</li>
-              </ul>
-              {/* Gambar Tim */}
-              <div className="mt-6 grid grid-cols-3 gap-4">
-                <div className="flex justify-center">
+            {/* Card for each developer */}
+            {[ 
+              { name: "Revan Fazry Huda", image: "/team/revan.jpg", role: "Frontend & Backend Developer" },
+              { name: "Moh Syafiq Ade Luwindra", image: "/team/syafiq.jpg", role: "Frontend & Backend Developer" },
+              { name: "Syahrani", image: "/team/syahrani.jpg", role: "Frontend & Backend Developer" }
+            ].map((teamMember, index) => (
+              <div key={index} className="bg-white p-8 rounded-xl shadow-2xl transition-transform transform hover:scale-105 hover:shadow-2xl ease-in-out duration-300">
+                <div className="flex justify-center mb-6">
                   <Image
-                    src="/team/revan.jpg" // Gambar Revan
-                    alt="Revan Fazry Huda"
-                    width={80}
-                    height={80}
-                    className="rounded-full object-cover"
+                    src={teamMember.image} // Gambar Anggota Tim
+                    alt={teamMember.name}
+                    width={150} // Ukuran lebih besar
+                    height={150} // Ukuran lebih besar
+                    className="rounded-full object-cover border-4 border-[#FFB6B9]" // Border untuk gambar
                   />
                 </div>
-                <div className="flex justify-center">
-                  <Image
-                    src="/team/syafiq.jpg" // Gambar Syafiq
-                    alt="Moh Syafiq Ade Luwindra"
-                    width={80}
-                    height={80}
-                    className="rounded-full object-cover"
-                  />
-                </div>
-                <div className="flex justify-center">
-                  <Image
-                    src="/team/syahrani.jpg" // Gambar Syahrani
-                    alt="Syahrani"
-                    width={80}
-                    height={80}
-                    className="rounded-full object-cover"
-                  />
-                </div>
+                <h4 className="text-2xl font-semibold text-gray-800 mb-2 text-center">
+                  {teamMember.name}
+                </h4>
+                <p className="text-center text-gray-600 text-lg">{teamMember.role}</p>
               </div>
-            </div>
+            ))}
+          </div>
 
-            {/* Tim Machine Learning */}
-            <div className="bg-white p-6 rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl ease-in-out duration-300">
-              <h3 className="text-2xl font-semibold text-gray-800 mb-4">Machine Learning Engineers</h3>
-              <ul className="list-disc list-inside text-gray-600 space-y-2">
-                <li>Safiratun Nisa</li>
-                <li>Shakira Angelina Ika Putri</li>
-                <li>Nabiel Muhammad Imjauzanansyah</li>
-              </ul>
-              {/* Gambar Tim */}
-              <div className="mt-6 grid grid-cols-3 gap-4">
-                <div className="flex justify-center">
+          {/* Machine Learning Engineers Section */}
+          <h3 className="text-2xl font-semibold text-gray-800 mb-6 mt-12">Machine Learning Engineers</h3>
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            {/* Card for each ML Engineer */}
+            {[ 
+              { name: "Safiratun Nisa", image: "/team/safira.jpeg", role: "Machine Learning Engineer" },
+              { name: "Shakira Angelina Ika Putri", image: "/team/shakira.jpg", role: "Machine Learning Engineer" },
+              { name: "Nabiel Muhammad Imjauzanansyah", image: "/team/nabiel.jpg", role: "Machine Learning Engineer" }
+            ].map((teamMember, index) => (
+              <div key={index} className="bg-white p-8 rounded-xl shadow-2xl transition-transform transform hover:scale-105 hover:shadow-2xl ease-in-out duration-300">
+                <div className="flex justify-center mb-6">
                   <Image
-                    src="/team/safira.jpg" // Gambar Safira
-                    alt="Safiratun Nisa"
-                    width={80}
-                    height={80}
-                    className="rounded-full object-cover"
+                    src={teamMember.image} // Gambar Anggota Tim
+                    alt={teamMember.name}
+                    width={150} // Ukuran lebih besar
+                    height={150} // Ukuran lebih besar
+                    className="rounded-full object-cover border-4 border-[#FFB6B9]" // Border untuk gambar
                   />
                 </div>
-                <div className="flex justify-center">
-                  <Image
-                    src="/team/shakira.jpg" // Gambar Shakira
-                    alt="Shakira Angelina Ika Putri"
-                    width={80}
-                    height={80}
-                    className="rounded-full object-cover"
-                  />
-                </div>
-                <div className="flex justify-center">
-                  <Image
-                    src="/team/nabiel.jpg" // Gambar Nabiel
-                    alt="Nabiel Muhammad Imjauzanansyah"
-                    width={80}
-                    height={80}
-                    className="rounded-full object-cover"
-                  />
-                </div>
+                <h4 className="text-2xl font-semibold text-gray-800 mb-2 text-center">
+                  {teamMember.name}
+                </h4>
+                <p className="text-center text-gray-600 text-lg">{teamMember.role}</p>
               </div>
-            </div>
+            ))}
           </div>
         </section>
 
