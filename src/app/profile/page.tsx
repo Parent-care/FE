@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import ProfileAvatarUploader from './ProfileAvatarUploader';
 
 type ProfileResponse = {
   isLoggedIn: boolean;
@@ -100,9 +99,9 @@ const ProfilePage = () => {
             </p>
           )}
 
-          {/* Avatar Uploader Section */}
-          <ProfileAvatarUploader />
-
+          <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold">
+                        {user.nama_lengkap?.charAt(0)}
+                      </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <div>
               <h2 className="text-xl font-semibold text-gray-700 mb-2">Nama Lengkap</h2>
