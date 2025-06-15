@@ -31,7 +31,7 @@ const ForumPost = ({ id, content, topic, nama_lengkap, answers, onAddAnswer }: F
     <div className="bg-white p-6 rounded-lg shadow-lg mb-6 max-w-2xl mx-auto">
       {/* Post Header */}
       <div className="flex items-center space-x-4">
-        <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold text-lg">
+        <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold text-lg hover:bg-orange-600 cursor-pointer transition duration-200">
           {nama_lengkap?.charAt(0)}
         </div>
         <div>
@@ -44,16 +44,16 @@ const ForumPost = ({ id, content, topic, nama_lengkap, answers, onAddAnswer }: F
       <p className="mt-4 text-gray-700 text-base">{content}</p>
 
       {/* Add Answer */}
-      <div className="mt-6">
+      <div className="mt-6 space-y-3">
         <input
           type="text"
           placeholder="Tulis jawaban..."
-          className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 transition duration-200"
           value={answerText}
           onChange={(e) => setAnswerText(e.target.value)}
         />
         <button
-          className="mt-3 bg-blue-500 text-white px-6 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="bg-blue-500 text-white px-6 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-full md:w-auto transition duration-200 hover:bg-blue-600"
           onClick={handleSubmit}
         >
           Kirim

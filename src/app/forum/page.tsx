@@ -124,8 +124,8 @@ export default function ForumList() {
   );
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+    <div className="max-w-4xl mx-auto p-6 space-y-8">
+      <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8">
         Forum Diskusi
       </h1>
 
@@ -135,14 +135,16 @@ export default function ForumList() {
         <input
           type="text"
           placeholder="Cari post..."
-          className="border p-3 w-full rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className="border p-4 w-full md:w-1/2 mx-auto rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-orange-500"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
       {isLoading ? (
-        <p className="text-center text-gray-500">Sedang memuat...</p>
+        <div className="flex justify-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-orange-500"></div>
+        </div>
       ) : filteredPosts.length === 0 ? (
         <p className="text-center text-gray-500">Tidak ada post ditemukan.</p>
       ) : (
@@ -150,7 +152,7 @@ export default function ForumList() {
           {filteredPosts.map((post) => (
             <div
               key={post.id}
-              className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300"
+              className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <ForumPost
                 id={post.id}
