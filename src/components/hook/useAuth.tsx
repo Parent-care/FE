@@ -32,7 +32,7 @@ export function useAuth() {
             ? `https://be-production-0885.up.railway.app${avatarPath}`
             : null;
 
-          setUser({ ...data.user, avatar: avatarUrl }); // ✅ ubah avatar jadi URL lengkap
+          setUser({ ...data.user, avatar: avatarUrl });
         } else {
           console.warn('User tidak login');
         }
