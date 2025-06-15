@@ -28,40 +28,52 @@ const ForumPost = ({ id, content, topic, nama_lengkap, answers, onAddAnswer }: F
   };
 
   return (
-    <div className="bg-white p-4 rounded shadow mb-4">
-      <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold">
-                        {nama_lengkap?.charAt(0)}
-                      </div>
-      <p className="font-semibold">{nama_lengkap}</p>  {/* Nama Pengirim Post */}
-      {topic && <p className="font-bold text-orange-600">{topic}</p>} {/* Menampilkan Topic */}
-      <p className="mb-2">{content}</p>
+    <div className="bg-white p-6 rounded-lg shadow-lg mb-6 max-w-2xl mx-auto">
+      {/* Post Header */}
+      <div className="flex items-center space-x-4">
+        <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold text-lg">
+          {nama_lengkap?.charAt(0)}
+        </div>
+        <div>
+          <p className="font-semibold text-lg">{nama_lengkap}</p>
+          {topic && <p className="font-bold text-orange-600 mt-1">{topic}</p>}
+        </div>
+      </div>
 
-      <div className="mt-2">
+      {/* Post Content */}
+      <p className="mt-4 text-gray-700 text-base">{content}</p>
+
+      {/* Add Answer */}
+      <div className="mt-6">
         <input
           type="text"
           placeholder="Tulis jawaban..."
-          className="border p-2 w-full rounded"
+          className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
           value={answerText}
           onChange={(e) => setAnswerText(e.target.value)}
         />
         <button
-          className="mt-2 bg-blue-500 text-white px-4 py-1 rounded"
+          className="mt-3 bg-blue-500 text-white px-6 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           onClick={handleSubmit}
         >
           Kirim
         </button>
       </div>
 
+      {/* Answers */}
       {answers.length > 0 && (
-        <div className="mt-3">
-          <p className="text-sm font-bold">Jawaban:</p>
+        <div className="mt-6">
+          <p className="text-sm font-semibold text-gray-800">Jawaban:</p>
           {answers.map((a) => (
-            <p key={a.id} className="text-sm ml-2 mt-1">
-              <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold">
-                        {a.username?.charAt(0)}
-                      </div>
-              {a.username}: {a.answer} {/* Menampilkan Nama Pengirim Jawaban */}
-            </p>
+            <div key={a.id} className="flex items-start space-x-4 mt-4">
+              <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold text-lg">
+                {a.username?.charAt(0)}
+              </div>
+              <div>
+                <p className="font-semibold">{a.username}</p>
+                <p className="text-gray-600 text-sm mt-1">{a.answer}</p>
+              </div>
+            </div>
           ))}
         </div>
       )}
