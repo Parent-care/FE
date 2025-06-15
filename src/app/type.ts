@@ -3,6 +3,7 @@ export interface User {
   nama_lengkap: string;
   email: string;
    token?: string
+   avatar?: string | null;
 }
 
 export interface AuthResponse {
