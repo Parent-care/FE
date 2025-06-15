@@ -33,7 +33,7 @@ const handleLogout = async (e?: React.MouseEvent<HTMLButtonElement>) => {
 
     if (res.ok) {
       localStorage.removeItem('token');
-      window.location.href = '/';
+      window.location.href = '/About';
     } else {
       const errorData = await res.json();
       console.error('Logout failed:', errorData.message);
