@@ -88,7 +88,7 @@ const ProfilePage = () => {
     <main className="min-h-screen bg-gradient-to-br from-pink-50 via-orange-50 to-purple-100 py-12">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Profil Pengguna</h1>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-800">Profil Pengguna</h1>
           <p className="text-gray-600 mt-2">Kelola informasi dan aktivitas Anda</p>
         </div>
 
@@ -99,9 +99,11 @@ const ProfilePage = () => {
             </p>
           )}
 
-          <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold">
-                        {user.nama_lengkap?.charAt(0)}
-                      </div>
+          <div className="w-36 h-36 bg-orange-500 rounded-full flex items-center justify-center text-white text-6xl font-semibold mx-auto shadow-xl transform hover:scale-110 transition-all duration-300 ease-in-out">
+  {user.nama_lengkap?.charAt(0)}
+</div>
+
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <div>
               <h2 className="text-xl font-semibold text-gray-700 mb-2">Nama Lengkap</h2>
@@ -111,7 +113,7 @@ const ProfilePage = () => {
                   name="nama_lengkap"
                   value={formData.nama_lengkap}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded-md"
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
               ) : (
                 <p className="text-gray-600">{user.nama_lengkap}</p>
@@ -126,7 +128,7 @@ const ProfilePage = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded-md"
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
               ) : (
                 <p className="text-gray-600">{user.email}</p>
@@ -138,13 +140,13 @@ const ProfilePage = () => {
             {isEditing ? (
               <>
                 <button
-                  className="bg-green-600 text-white px-6 py-2 rounded-xl hover:bg-green-700"
+                  className="bg-green-600 text-white px-6 py-2 rounded-xl hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
                   onClick={handleSave}
                 >
                   Simpan
                 </button>
                 <button
-                  className="bg-gray-300 text-gray-800 px-6 py-2 rounded-xl hover:bg-gray-400"
+                  className="bg-gray-300 text-gray-800 px-6 py-2 rounded-xl hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
                   onClick={() => {
                     setIsEditing(false);
                     setFormData({
@@ -159,7 +161,7 @@ const ProfilePage = () => {
               </>
             ) : (
               <button
-                className="bg-orange-500 text-white px-6 py-3 rounded-xl shadow hover:bg-orange-600 transition-all duration-200"
+                className="bg-orange-500 text-white px-6 py-3 rounded-xl shadow hover:bg-orange-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 onClick={() => setIsEditing(true)}
               >
                 Edit Profil
