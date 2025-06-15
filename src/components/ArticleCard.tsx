@@ -13,18 +13,18 @@ const ArticleCard = ({
   url: string | undefined;
   imageUrl: string | undefined;
 }) => {
-  // Cek apakah URL mengarah ke gambar valid (bukan undefined atau kosong)
+  // Cek apakah URL mengarah ke gambar valid
   const isValidImage = (url: string | undefined) =>
     !!url && /\.(jpg|jpeg|png|webp|gif)$/i.test(url);
 
-  const fallbackImage = "/fallback.jpg"; // Simpan di folder /public
+  const fallbackImage = "/fallback.jpg"; // Letakkan fallback.jpg di folder /public
   const imageSrc = isValidImage(imageUrl) ? imageUrl! : fallbackImage;
 
   const fullUrl = url && (url.startsWith("http") || url.startsWith("https")) ? url : undefined;
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-md mb-4">
-      {/* Render image hanya kalau imageSrc valid */}
+      {/* Gambar artikel atau fallback */}
       <Image
         src={imageSrc}
         alt={title}
