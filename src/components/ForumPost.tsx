@@ -29,6 +29,9 @@ const ForumPost = ({ id, content, topic, nama_lengkap, answers, onAddAnswer }: F
 
   return (
     <div className="bg-white p-4 rounded shadow mb-4">
+      <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold">
+                        {nama_lengkap?.charAt(0)}
+                      </div>
       <p className="font-semibold">{nama_lengkap}</p>  {/* Nama Pengirim Post */}
       {topic && <p className="font-bold text-orange-600">{topic}</p>} {/* Menampilkan Topic */}
       <p className="mb-2">{content}</p>
@@ -54,6 +57,9 @@ const ForumPost = ({ id, content, topic, nama_lengkap, answers, onAddAnswer }: F
           <p className="text-sm font-bold">Jawaban:</p>
           {answers.map((a) => (
             <p key={a.id} className="text-sm ml-2 mt-1">
+              <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold">
+                        {a.username?.charAt(0)}
+                      </div>
               {a.username}: {a.answer} {/* Menampilkan Nama Pengirim Jawaban */}
             </p>
           ))}
