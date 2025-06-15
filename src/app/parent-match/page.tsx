@@ -73,7 +73,7 @@ const ParentMatchPage = () => {
                 <div className="text-gray-600">Pertanyaan Terarah</div>
               </div>
               <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-lg">
-                <div className="text-3xl font-bold text-orange-500 mb-2">4</div>
+                <div className="text-3xl font-bold text-orange-500 mb-2">5</div>
                 <div className="text-gray-600">Gaya Parenting</div>
               </div>
               <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-lg">

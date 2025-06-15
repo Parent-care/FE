@@ -476,7 +476,7 @@ const ParentMatchQuiz: React.FC = () => {
 
   const currentAnswer = answers[questions[currentQuestion]?.id];
 
-  if (isLoading) return <div className="text-center p-6">Menganalisis jawaban…</div>;
+  if (isLoading) return <div className="text-center text-black p-6">Menganalisis jawaban…</div>;
 
   if (result) {
   const totalScore = result.score.reduce((sum, val) => sum + val, 0);
@@ -579,7 +579,7 @@ const ParentMatchQuiz: React.FC = () => {
   return (
     <div className="max-w-xl mx-auto p-6 bg-white rounded shadow">
       <p className="text-gray-600 mb-2">Pertanyaan {currentQuestion + 1} dari {questions.length}</p>
-      <div className="w-full bg-gray-200 h-2 rounded mb-4">
+      <div className="w-full bg-gray-200 text-black h-2 rounded mb-4">
         <div className="h-2 bg-orange-500 rounded" style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}></div>
       </div>
       <h3 className="text-lg font-semibold mb-4">{questions[currentQuestion].question}</h3>
