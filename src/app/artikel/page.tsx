@@ -10,7 +10,7 @@ interface Article {
   publishedAt: string;
   description: string;
   url: string;
-  urlToImage: string; // Menambahkan urlToImage untuk gambar
+  image: string; // GNews pakai 'image', bukan 'urlToImage'
 }
 
 // Definisikan tipe untuk response API
@@ -75,7 +75,7 @@ const Artikel = () => {
               date={new Date(article.publishedAt).toLocaleDateString()}
               content={article.description || "No content available."}
               url={article.url} // Kirimkan URL yang valid ke komponen ArticleCard
-              imageUrl={article.urlToImage} // Kirimkan URL gambar ke komponen ArticleCard
+              imageUrl={article.image} // Kirimkan URL gambar ke komponen ArticleCard
             />
           ))
         ) : (
