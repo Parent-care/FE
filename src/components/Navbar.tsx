@@ -34,9 +34,6 @@ const handleLogout = async (e?: React.MouseEvent<HTMLButtonElement>) => {
     if (res.ok) {
       localStorage.removeItem('token');
       logout();
-      setTimeout(() => {
-    window.location.href = '/About';
-  }, 1000); // beri waktu browser menyimpan perubahan cookie
     } else {
       const errorData = await res.json();
       console.error('Logout failed:', errorData.message);
