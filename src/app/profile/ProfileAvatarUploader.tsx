@@ -47,7 +47,7 @@ const ProfileAvatarUploader = () => {
     const fileExt = selectedFile.name.split('.').pop();
     const fileName = `avatar-${user.id}-${Date.now()}.${fileExt}`;
     const formData = new FormData();
-    formData.append('file', selectedFile);
+    formData.append('avatar', selectedFile);
     formData.append('fileName', fileName);
 
     try {
