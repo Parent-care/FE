@@ -48,7 +48,6 @@ const handleLogout = async () => {
   }
 };
 
-
   return (
     <nav className="bg-gradient-to-r from-[#FFB6B9] to-[#FFE0D7] p-4 shadow-md fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
@@ -89,7 +88,7 @@ const handleLogout = async () => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-6 items-center">
+        <div className="hidden md:flex space-x-6 item-center">
           <Link href="/parent-match" className="text-gray-800 hover:text-orange-500 transition-colors">
             Parent Match
           </Link>
@@ -129,7 +128,14 @@ const handleLogout = async () => {
 
               {/* Dropdown Menu */}
               {isDropdownOpen && (
-                <div className="relative mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50 max-h-96 overflow-y-auto">
+                <div
+                  className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50 max-h-96 overflow-y-auto"
+                  style={{
+                    top: '100%', // Dropdown starts from the button
+                    left: 'auto', // Automatically adjust based on the screen width
+                    right: 0, // Align the dropdown to the right
+                  }}
+                >
                   <div className="px-4 py-3 border-b border-gray-100">
                     <div className="flex items-center space-x-3">
                       <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold">
