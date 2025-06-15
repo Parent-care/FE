@@ -3,10 +3,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
-import { useAuth } from '../components/hook/useAuth'; // Pastikan path sesuai dengan lokasi useAuth Anda
+import { useAuth } from '../components/hook/useAuth';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // For mobile menu toggle
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { user, loading } = useAuth();
 
@@ -21,31 +22,28 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-const handleLogout = async () => {
-  console.log('Logout clicked');
+  const handleLogout = async () => {
+    console.log('Logout clicked');
 
-  try {
-    const res = await fetch('https://be-production-0885.up.railway.app/api/auth/logout', {
-      method: 'POST',
-      credentials: 'include', // penting jika token disimpan di cookie
-    });
+    try {
+      const res = await fetch('https://be-production-0885.up.railway.app/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
 
-    if (res.ok) {
-      // Hapus token dari localStorage jika kamu menyimpannya di sana
-      localStorage.removeItem('token');
-
-      // Redirect manual jika belum pakai useRouter
-      window.location.href = '/';
-    } else {
-      const errorData = await res.json();
-      console.error('Logout failed:', errorData.message);
-      alert('Logout gagal: ' + errorData.message);
+      if (res.ok) {
+        localStorage.removeItem('token');
+        window.location.href = '/';
+      } else {
+        const errorData = await res.json();
+        console.error('Logout failed:', errorData.message);
+        alert('Logout gagal: ' + errorData.message);
+      }
+    } catch (err) {
+      console.error('Logout error:', err);
+      alert('Terjadi kesalahan saat logout.');
     }
-  } catch (err) {
-    console.error('Logout error:', err);
-    alert('Terjadi kesalahan saat logout.');
-  }
-};
+  };
 
   return (
     <nav className="bg-[#FFE0D7] p-4 shadow fixed top-0 left-0 right-0 z-50">
@@ -64,10 +62,27 @@ const handleLogout = async () => {
           <span className="text-2xl font-bold text-orange-500">ParentCare</span>
         </Link>
 
+        {/* Hamburger Menu for Mobile */}
+        <div className="md:hidden">
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-gray-800 focus:outline-none"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+
         {/* Menu dan Auth */}
-        <div className="flex items-center space-x-6">
+        <div className={`flex items-center space-x-6 ${isMobileMenuOpen ? 'block md:hidden' : 'hidden md:flex'}`}>
           {/* Navigasi */}
-          <div className="hidden md:flex space-x-4">
+          <div className="space-x-4">
             <Link href="/parent-match" className="text-gray-800 hover:text-orange-500 transition-colors">
               Parent Match
             </Link>
