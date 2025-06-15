@@ -58,7 +58,7 @@ export default function TentangKami() {
               <div className="mt-6 grid grid-cols-3 gap-4">
                 <div className="flex justify-center">
                   <Image
-                    src="/images/revan.jpg" // Gambar Revan
+                    src="/team/revan.jpg" // Gambar Revan
                     alt="Revan Fazry Huda"
                     width={80}
                     height={80}
@@ -67,7 +67,7 @@ export default function TentangKami() {
                 </div>
                 <div className="flex justify-center">
                   <Image
-                    src="/images/syafiq.jpg" // Gambar Syafiq
+                    src="/team/syafiq.jpg" // Gambar Syafiq
                     alt="Moh Syafiq Ade Luwindra"
                     width={80}
                     height={80}
@@ -76,7 +76,7 @@ export default function TentangKami() {
                 </div>
                 <div className="flex justify-center">
                   <Image
-                    src="/images/syahrani.jpg" // Gambar Syahrani
+                    src="/team/syahrani.jpg" // Gambar Syahrani
                     alt="Syahrani"
                     width={80}
                     height={80}
@@ -98,7 +98,7 @@ export default function TentangKami() {
               <div className="mt-6 grid grid-cols-3 gap-4">
                 <div className="flex justify-center">
                   <Image
-                    src="/images/safira.jpg" // Gambar Safira
+                    src="/team/safira.jpg" // Gambar Safira
                     alt="Safiratun Nisa"
                     width={80}
                     height={80}
@@ -107,7 +107,7 @@ export default function TentangKami() {
                 </div>
                 <div className="flex justify-center">
                   <Image
-                    src="/images/shakira.jpg" // Gambar Shakira
+                    src="/team/shakira.jpg" // Gambar Shakira
                     alt="Shakira Angelina Ika Putri"
                     width={80}
                     height={80}
@@ -116,7 +116,7 @@ export default function TentangKami() {
                 </div>
                 <div className="flex justify-center">
                   <Image
-                    src="/images/nabiel.jpg" // Gambar Nabiel
+                    src="/team/nabiel.jpg" // Gambar Nabiel
                     alt="Nabiel Muhammad Imjauzanansyah"
                     width={80}
                     height={80}
