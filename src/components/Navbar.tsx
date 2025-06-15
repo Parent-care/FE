@@ -21,20 +21,18 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-const handleLogout = async () => {
+const handleLogout = async (e?: React.MouseEvent<HTMLButtonElement>) => {
+  if (e) e.preventDefault(); // <-- ini yang mencegah refresh browser sebelum fetch berjalan
   console.log('Logout clicked');
 
   try {
     const res = await fetch('https://be-production-0885.up.railway.app/api/auth/logout', {
       method: 'POST',
-      credentials: 'include', // penting jika token disimpan di cookie
+      credentials: 'include',
     });
 
     if (res.ok) {
-      // Hapus token dari localStorage jika kamu menyimpannya di sana
       localStorage.removeItem('token');
-
-      // Redirect manual jika belum pakai useRouter
       window.location.href = '/';
     } else {
       const errorData = await res.json();
@@ -46,6 +44,7 @@ const handleLogout = async () => {
     alert('Terjadi kesalahan saat logout.');
   }
 };
+
 
   return (
     <nav className="bg-[#FFE0D7] p-4 shadow fixed top-0 left-0 right-0 z-50">
