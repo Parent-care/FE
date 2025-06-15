@@ -51,7 +51,7 @@ const ProfileAvatarUploader = () => {
     formData.append('fileName', fileName);
 
     try {
-      const res = await fetch(`${BASE_URL}/api/storage/avatar`, {
+      const res = await fetch(`${BASE_URL}/api/auth/upload-avatar`, {
         method: 'POST',
         body: formData,
         credentials: 'include',

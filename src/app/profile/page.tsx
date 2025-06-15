@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import ProfileAvatarUploader from '../../components/ProfileAvatarUploader';
+import ProfileAvatarUploader from './ProfileAvatarUploader';
 
 type ProfileResponse = {
   isLoggedIn: boolean;
