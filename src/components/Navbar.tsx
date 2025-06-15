@@ -22,31 +22,10 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-const handleLogout = async () => {
-  console.log('Logout clicked');
-
-  try {
-    const res = await fetch('https://be-production-0885.up.railway.app/api/auth/logout', {
-      method: 'POST',
-      credentials: 'include', // penting jika token disimpan di cookie
-    });
-
-    if (res.ok) {
-      // Hapus token dari localStorage jika kamu menyimpannya di sana
-      localStorage.removeItem('token');
-
-      // Redirect manual jika belum pakai useRouter
-      window.location.href = '/';
-    } else {
-      const errorData = await res.json();
-      console.error('Logout failed:', errorData.message);
-      alert('Logout gagal: ' + errorData.message);
-    }
-  } catch (err) {
-    console.error('Logout error:', err);
-    alert('Terjadi kesalahan saat logout.');
-  }
-};
+  const handleLogout = () => {
+    console.log('Logout clicked');
+    
+  };
 
   return (
     <nav className="bg-gradient-to-r from-[#FFB6B9] to-[#FFE0D7] p-4 shadow-md fixed top-0 left-0 right-0 z-50">
@@ -88,7 +67,7 @@ const handleLogout = async () => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-6 item-center">
+        <div className="hidden md:flex space-x-6 items-center justify-center">
           <Link href="/parent-match" className="text-gray-800 hover:text-orange-500 transition-colors">
             Parent Match
           </Link>
