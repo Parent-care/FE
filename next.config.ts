@@ -19,6 +19,7 @@ const nextConfig: NextConfig = {
       "wtop.com",
       "aol.com",
       "www.nbcnews.com",
+      "be-production-0885.up.railway.app",
     ],
   },
 };
