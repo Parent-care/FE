@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-
+import ProfileAvatarUploader from '../../components/ProfileAvatarUploader';
 
 type ProfileResponse = {
   isLoggedIn: boolean;
@@ -9,10 +9,10 @@ type ProfileResponse = {
     id: string;
     nama_lengkap: string;
     email: string;
+    avatar?: string;
   };
 };
 
-// Gunakan ENV agar mudah ubah antara dev/prod
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://be-production-0885.up.railway.app';
 
 const ProfilePage = () => {
@@ -100,7 +100,10 @@ const ProfilePage = () => {
             </p>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Avatar Uploader Section */}
+          <ProfileAvatarUploader />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <div>
               <h2 className="text-xl font-semibold text-gray-700 mb-2">Nama Lengkap</h2>
               {isEditing ? (
