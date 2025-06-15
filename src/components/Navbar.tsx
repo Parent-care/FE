@@ -8,7 +8,7 @@ import { useAuth } from '../components/hook/useAuth'; // Pastikan path sesuai de
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { user, loading } = useAuth();
+  const { user, loading, logout } = useAuth();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -33,6 +33,7 @@ const handleLogout = async (e?: React.MouseEvent<HTMLButtonElement>) => {
 
     if (res.ok) {
       localStorage.removeItem('token');
+      logout();
       window.location.href = '/About';
     } else {
       const errorData = await res.json();

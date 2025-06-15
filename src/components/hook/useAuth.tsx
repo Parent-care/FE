@@ -45,6 +45,9 @@ export function useAuth() {
 
     checkAuth();
   }, []);
-
-  return { user, loading };
+    const logout = () => {
+    setUser(null); // Reset user context
+    localStorage.removeItem('token'); // Optional, kalau kamu pakai token di localStorage
+  };
+  return { user, loading, logout };
 }
