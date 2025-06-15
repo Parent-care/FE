@@ -30,6 +30,7 @@ const ArticleCard = ({
         alt={title}
         width={500}
         height={300}
+        unoptimized 
         className="w-full h-auto object-cover rounded-t-lg mb-4"
       />
       
