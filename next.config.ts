@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
       "pagesix.com",
       "wtop.com",
       "aol.com",
+      "nbcnews.com",
     ],
   },
 };
