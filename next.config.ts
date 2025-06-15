@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
       "m.media-amazon.com",
       "abcnews.go.com",
       "whyy.org",
-      "formula1.com",
+      "www.formula1.com",
       "crash.net",
       "pagesix.com",
       "wtop.com",
