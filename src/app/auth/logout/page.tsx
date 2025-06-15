@@ -7,8 +7,23 @@ export default function LogoutPage() {
   const router = useRouter();
 
   useEffect(() => {
-    localStorage.removeItem('token'); // atau clear semua
-    router.push('/');
+    const performLogout = async () => {
+      try {
+        await fetch('https://be-production-0885.up.railway.app/api/auth/logout', {
+          method: 'POST',
+          credentials: 'include',
+        });
+
+        localStorage.removeItem('token'); // atau localStorage.clear()
+
+        router.push('/');
+      } catch (error) {
+        console.error('Logout error:', error);
+        router.push('/');
+      }
+    };
+
+    performLogout();
   }, [router]);
 
   return <div>Logging out...</div>;

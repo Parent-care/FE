@@ -65,9 +65,6 @@ const ParentMatchPage = () => {
                 </svg>
                 Mulai Quiz Sekarang
               </button>
-              <button className="border-2 border-orange-500 text-orange-500 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-orange-500 hover:text-white transition-all duration-200">
-                Pelajari Lebih Lanjut
-              </button>
             </div>
 
             <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
