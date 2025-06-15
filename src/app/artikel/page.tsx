@@ -52,7 +52,7 @@ const Artikel = () => {
           Artikel & Tips Parenting
         </h1>
         <div className="flex justify-center items-center">
-          <div className="loader">Loading...</div>
+          <div className="loader"></div>
         </div>
       </main>
     );
