@@ -5,7 +5,7 @@ const ArticleCard = ({
   date,
   content,
   url,
-  imageUrl
+  imageUrl,
 }: {
   title: string;
   date: string;
@@ -17,35 +17,53 @@ const ArticleCard = ({
   const isValidImage = (url: string | undefined) =>
     !!url && /\.(jpg|jpeg|png|webp|gif)$/i.test(url);
 
-  const fallbackImage = "/fallback.jpg"; // Letakkan fallback.jpg di folder /public
+  const fallbackImage = '/fallback.jpg'; // Letakkan fallback.jpg di folder /public
   const imageSrc = isValidImage(imageUrl) ? imageUrl! : fallbackImage;
 
-  const fullUrl = url && (url.startsWith("http") || url.startsWith("https")) ? url : undefined;
+  const fullUrl =
+    url && (url.startsWith('http') || url.startsWith('https')) ? url : undefined;
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md mb-4">
+    <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 mb-6">
       {/* Gambar artikel atau fallback */}
-      <Image
-        src={imageSrc}
-        alt={title}
-        width={500}
-        height={300}
-        unoptimized 
-        className="w-full h-auto object-cover rounded-t-lg mb-4"
-      />
-      
-      <h3 className="text-lg font-semibold text-gray-800">
+      <div className="relative w-full h-60 overflow-hidden rounded-t-xl mb-6">
+        <Image
+          src={imageSrc}
+          alt={title}
+          layout="fill"
+          objectFit="cover"
+          className="transition-all duration-500 ease-in-out"
+        />
+      </div>
+
+      {/* Judul Artikel */}
+      <h3 className="text-2xl font-semibold text-gray-900 mb-2 hover:text-blue-500 transition-colors duration-300">
         {fullUrl ? (
-          <a href={fullUrl} target="_blank" rel="noopener noreferrer" className="hover:text-blue-500">
+          <a href={fullUrl} target="_blank" rel="noopener noreferrer">
             {title}
           </a>
         ) : (
           <span>{title}</span>
         )}
       </h3>
-      
-      <p className="text-gray-600 text-sm">{date}</p>
-      <p className="text-gray-700 mt-2">{content}</p>
+
+      {/* Tanggal Artikel */}
+      <p className="text-gray-500 text-sm mb-3">{date}</p>
+
+      {/* Deskripsi Singkat */}
+      <p className="text-gray-700 mb-4 text-base">{content}</p>
+
+      {/* Tombol Lihat Selengkapnya */}
+      {fullUrl && (
+        <a
+          href={fullUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:text-blue-800 font-medium"
+        >
+          Baca Selengkapnya &rarr;
+        </a>
+      )}
     </div>
   );
 };
