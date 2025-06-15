@@ -585,7 +585,7 @@ const ParentMatchQuiz: React.FC = () => {
       <h3 className="text-lg font-semibold mb-4">{questions[currentQuestion].question}</h3>
       <div className="space-y-3 mb-6">
         {questions[currentQuestion].options.map((opt, i) => (
-          <button key={i} onClick={() => handleAnswerSelect(opt.value, opt.weight)} className={`w-full px-4 py-2 text-left border rounded ${currentAnswer?.value === opt.value ? 'bg-orange-100 border-orange-500' : 'hover:bg-gray-100'}`}>
+          <button key={i} onClick={() => handleAnswerSelect(opt.value, opt.weight)} className={`w-full px-4 py-2 text-black text-left border rounded ${currentAnswer?.value === opt.value ? 'bg-orange-100 border-orange-500' : 'hover:bg-gray-100'}`}>
             {opt.text}
           </button>
         ))}
