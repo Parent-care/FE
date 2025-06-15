@@ -67,19 +67,21 @@ const Navbar = () => {
         </div>
 
         {/* Menu and Auth Area */}
-        <div className={`flex items-center space-x-6 md:flex ${isMobileMenuOpen ? 'block' : 'hidden'} md:block`}>
+        <div
+          className={`flex items-center space-x-6 md:flex ${isMobileMenuOpen ? 'flex-col mt-4' : 'hidden'} md:block`}
+        >
           {/* Navigation Links */}
-          <div className="flex space-x-4">
-            <Link href="/parent-match" className="text-gray-800 hover:text-orange-500 transition-colors">
+          <div className="flex space-x-4 flex-col md:flex-row">
+            <Link href="/parent-match" className="text-gray-800 hover:text-orange-500 transition-colors py-2">
               Parent Match
             </Link>
-            <Link href="/artikel" className="text-gray-800 hover:text-orange-500 transition-colors">
+            <Link href="/artikel" className="text-gray-800 hover:text-orange-500 transition-colors py-2">
               Artikel
             </Link>
-            <Link href="/forum" className="text-gray-800 hover:text-orange-500 transition-colors">
+            <Link href="/forum" className="text-gray-800 hover:text-orange-500 transition-colors py-2">
               Forum
             </Link>
-            <Link href="/About" className="text-gray-800 hover:text-orange-500 transition-colors">
+            <Link href="/About" className="text-gray-800 hover:text-orange-500 transition-colors py-2">
               About Us
             </Link>
           </div>
