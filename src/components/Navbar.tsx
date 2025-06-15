@@ -36,7 +36,7 @@ const handleLogout = async () => {
       localStorage.removeItem('token');
 
       // Redirect manual jika belum pakai useRouter
-      window.location.href = '/';
+      window.location.href = 'https://be-production-0885.up.railway.app/auth/login';
     } else {
       const errorData = await res.json();
       console.error('Logout failed:', errorData.message);
