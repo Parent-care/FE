@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function TentangKami() {
   return (
     <main className="bg-gradient-to-r from-[#FFE0D7] to-[#FFB6B9] min-h-screen py-16">
@@ -16,7 +18,7 @@ export default function TentangKami() {
         </section>
 
         {/* Card Section */}
-        <section className="grid md:grid-cols-2 gap-12">
+        <section className="grid sm:grid-cols-1 md:grid-cols-2 gap-12">
           {/* Card 1 */}
           <div className="bg-white rounded-xl shadow-xl p-8 transition-transform transform hover:scale-105 hover:shadow-2xl ease-in-out duration-300">
             <h2 className="text-3xl font-semibold text-gray-800 mb-4">
@@ -35,6 +37,94 @@ export default function TentangKami() {
             <p className="text-gray-600 leading-relaxed text-lg">
               Kami ingin menjadi platform utama dalam memberikan layanan konsultasi parenting yang mudah diakses, dengan fokus pada kesejahteraan keluarga. Dengan pendekatan berbasis bukti, kami menyediakan wawasan yang bermanfaat dan praktis.
             </p>
+          </div>
+        </section>
+
+        {/* Tim & Bidang Section */}
+        <section className="mt-16">
+          <h2 className="text-3xl font-semibold text-gray-800 text-center mb-8">Tim Kami</h2>
+          
+          {/* Frontend & Backend Developer */}
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            {/* Tim Frontend & Backend */}
+            <div className="bg-white p-6 rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl ease-in-out duration-300">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">Frontend & Backend Developer</h3>
+              <ul className="list-disc list-inside text-gray-600 space-y-2">
+                <li>Revan Fazry Huda</li>
+                <li>Moh Syafiq Ade Luwindra</li>
+                <li>Syahrani</li>
+              </ul>
+              {/* Gambar Tim */}
+              <div className="mt-6 grid grid-cols-3 gap-4">
+                <div className="flex justify-center">
+                  <Image
+                    src="/images/revan.jpg" // Gambar Revan
+                    alt="Revan Fazry Huda"
+                    width={80}
+                    height={80}
+                    className="rounded-full object-cover"
+                  />
+                </div>
+                <div className="flex justify-center">
+                  <Image
+                    src="/images/syafiq.jpg" // Gambar Syafiq
+                    alt="Moh Syafiq Ade Luwindra"
+                    width={80}
+                    height={80}
+                    className="rounded-full object-cover"
+                  />
+                </div>
+                <div className="flex justify-center">
+                  <Image
+                    src="/images/syahrani.jpg" // Gambar Syahrani
+                    alt="Syahrani"
+                    width={80}
+                    height={80}
+                    className="rounded-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Tim Machine Learning */}
+            <div className="bg-white p-6 rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl ease-in-out duration-300">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">Machine Learning Engineers</h3>
+              <ul className="list-disc list-inside text-gray-600 space-y-2">
+                <li>Safiratun Nisa</li>
+                <li>Shakira Angelina Ika Putri</li>
+                <li>Nabiel Muhammad Imjauzanansyah</li>
+              </ul>
+              {/* Gambar Tim */}
+              <div className="mt-6 grid grid-cols-3 gap-4">
+                <div className="flex justify-center">
+                  <Image
+                    src="/images/safira.jpg" // Gambar Safira
+                    alt="Safiratun Nisa"
+                    width={80}
+                    height={80}
+                    className="rounded-full object-cover"
+                  />
+                </div>
+                <div className="flex justify-center">
+                  <Image
+                    src="/images/shakira.jpg" // Gambar Shakira
+                    alt="Shakira Angelina Ika Putri"
+                    width={80}
+                    height={80}
+                    className="rounded-full object-cover"
+                  />
+                </div>
+                <div className="flex justify-center">
+                  <Image
+                    src="/images/nabiel.jpg" // Gambar Nabiel
+                    alt="Nabiel Muhammad Imjauzanansyah"
+                    width={80}
+                    height={80}
+                    className="rounded-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

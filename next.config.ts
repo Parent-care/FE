@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
       "pagesix.com",
       "wtop.com",
       "aol.com",
+      "cinemablend.com",
       "www.nbcnews.com",
       "be-production-0885.up.railway.app",
     ],
