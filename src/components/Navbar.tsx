@@ -130,7 +130,7 @@ const handleLogout = async () => {
               {/* Dropdown Menu */}
               {isDropdownOpen && (
                 <div
-                  className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50 max-h-96 overflow-y-auto"
+                  className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-9990 max-h-96 overflow-y-auto"
                   style={{
                     top: '100%', // Dropdown starts from the button
                     left: 'auto', // Automatically adjust based on the screen width
