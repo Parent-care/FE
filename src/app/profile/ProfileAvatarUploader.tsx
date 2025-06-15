@@ -20,7 +20,11 @@ const ProfileAvatarUploader = () => {
         const data = await res.json();
         if (data.isLoggedIn) {
           setUser(data.user);
-          setAvatarUrl(data.user.avatar || null);
+          // Jika avatar adalah path (bukan URL penuh), tambahkan BASE_URL
+          const url = data.user.avatar
+            ? `${BASE_URL}${data.user.avatar}`
+            : null;
+          setAvatarUrl(url);
         }
       } catch (err) {
         console.error('Gagal memuat user:', err);
@@ -44,11 +48,8 @@ const ProfileAvatarUploader = () => {
   const handleUpload = async () => {
     if (!selectedFile || !user) return;
 
-    const fileExt = selectedFile.name.split('.').pop();
-    const fileName = `avatar-${user.id}-${Date.now()}.${fileExt}`;
     const formData = new FormData();
     formData.append('avatar', selectedFile);
-    formData.append('fileName', fileName);
 
     try {
       const res = await fetch(`${BASE_URL}/api/auth/upload-avatar`, {
@@ -57,12 +58,12 @@ const ProfileAvatarUploader = () => {
         credentials: 'include',
       });
 
-      if (!res.ok) {
-        throw new Error('Upload gagal');
-      }
+      if (!res.ok) throw new Error('Upload gagal');
 
       const result = await res.json();
-      setAvatarUrl(result.avatarUrl);
+      if (result.user && result.user.avatar) {
+        setAvatarUrl(`${BASE_URL}${result.user.avatar}`);
+      }
       setPreviewUrl(null);
       setSelectedFile(null);
       setStatus('Avatar berhasil diunggah!');
@@ -95,7 +96,12 @@ const ProfileAvatarUploader = () => {
           </div>
         )}
 
-        <input type="file" accept="image/*" onChange={handleFileChange} />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          className="text-sm"
+        />
       </div>
 
       <p className="text-sm text-gray-500 mb-4">* Maks. 2MB, JPG/PNG</p>
