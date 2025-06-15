@@ -30,6 +30,7 @@ const ArticleCard = ({
         <Image
           src={imageSrc}
           alt={title}
+          unoptimized
           layout="fill"
           objectFit="cover"
           className="transition-all duration-500 ease-in-out"

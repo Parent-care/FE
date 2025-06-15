@@ -21,6 +21,7 @@ interface ApiResponse {
 const Artikel = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -29,18 +30,14 @@ const Artikel = () => {
           `https://gnews.io/api/v4/search?q=parenting&lang=en&country=us&max=10&apikey=93bbf099c8a496438f454a524f38f7af`
         );
 
-        // Debugging: lihat response yang diterima
-        console.log("API Response:", response.data);
-
         // Filter artikel yang memiliki URL valid
-        const articlesWithUrls = response.data.articles.filter(article => article.url);
-
-        console.log("Articles with valid URLs:", articlesWithUrls);
+        const articlesWithUrls = response.data.articles.filter((article) => article.url);
 
         setArticles(articlesWithUrls);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching articles:", error);
+        setError("Gagal mengambil artikel. Silakan coba lagi nanti.");
+      } finally {
         setLoading(false);
       }
     };
@@ -54,7 +51,9 @@ const Artikel = () => {
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
           Artikel & Tips Parenting
         </h1>
-        <p className="text-center text-gray-600">Loading...</p>
+        <div className="flex justify-center items-center">
+          <div className="loader">Loading...</div>
+        </div>
       </main>
     );
   }
@@ -64,7 +63,13 @@ const Artikel = () => {
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">
         Artikel & Tips Parenting
       </h1>
-      
+
+      {error && (
+        <div className="bg-red-200 p-4 rounded-md mb-8 text-center text-red-600">
+          {error}
+        </div>
+      )}
+
       {/* Grid Layout untuk artikel */}
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {articles.length > 0 ? (
@@ -75,7 +80,7 @@ const Artikel = () => {
               date={new Date(article.publishedAt).toLocaleDateString()}
               content={article.description || "No content available."}
               url={article.url} // Kirimkan URL yang valid ke komponen ArticleCard
-              imageUrl={article.image} // Kirimkan URL gambar ke komponen ArticleCard
+              imageUrl={article.image || '/fallback-image.jpg'} // Provide fallback image if none exists
             />
           ))
         ) : (
