@@ -156,7 +156,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen" style={{ background: 'var(--background)' }}>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#FFE0D7] via-[#FFF5F0] to-white py-20 px-4">
+      <section className="bg-gradient-to-br from-[#FFE0D7] via-[#FFF5F0] to-white py-20 px-4 pt-30">
         <div className="container mx-auto text-center">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">

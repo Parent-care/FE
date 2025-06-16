@@ -47,7 +47,7 @@ const Artikel = () => {
 
   if (loading) {
     return (
-      <main className="container mx-auto p-8">
+      <main className="container mx-auto p-8 pt-30">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
           Artikel & Tips Parenting
         </h1>
