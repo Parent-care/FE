@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function TentangKami() {
   return (
-    <main className="bg-gradient-to-r from-[#FFE0D7] to-[#FFB6B9] min-h-screen py-30">
+    <main className="bg-gradient-to-r from-[#FFE0D7] to-[#FFB6B9] min-h-screen py-20">
       <div className="container mx-auto px-6 md:px-12">
         {/* Hero Section */}
         <section className="text-center mb-16">
