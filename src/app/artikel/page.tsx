@@ -59,7 +59,7 @@ const Artikel = () => {
   }
 
   return (
-    <main className="container mx-auto p-8">
+    <main className="container mx-auto px-8 py-32">
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">
         Artikel & Tips Parenting
       </h1>
