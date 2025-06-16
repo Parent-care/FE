@@ -135,7 +135,7 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.heroImage}>
-            <Image src="/family.png" alt="Hero Image" width={500} height={400} className="rounded-lg" />
+            <Image src="/family.png" alt="Hero Image" width={500} height={400} className="rounded-lg drop-shadow-md" />
           </div>
         </section>
 

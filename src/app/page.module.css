@@ -78,11 +78,6 @@
   justify-content: flex-end;
 }
 
-.heroImage img {
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
 .expertSection {
   margin: 40px 0;
   text-align: center;
