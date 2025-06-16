@@ -83,13 +83,14 @@ export default function TentangKami() {
             ].map((teamMember, index) => (
               <div key={index} className="bg-white p-8 rounded-xl shadow-2xl transition-transform transform hover:scale-105 hover:shadow-2xl ease-in-out duration-300">
                 <div className="flex justify-center mb-6">
-                  <Image
-                    src={teamMember.image} // Gambar Anggota Tim
-                    alt={teamMember.name}
-                    width={150} // Ukuran lebih besar
-                    height={150} // Ukuran lebih besar
-                    className="rounded-full object-cover border-4 border-[#FFB6B9]" // Border untuk gambar
-                  />
+ <Image
+  src={teamMember.image}
+  alt={teamMember.name}
+  width={150}
+  height={150}
+  className="w-[150px] h-[150px] aspect-square rounded-full object-cover border-4 border-[#FFB6B9]"
+/>
+
                 </div>
                 <h4 className="text-2xl font-semibold text-gray-800 mb-2 text-center">
                   {teamMember.name}
