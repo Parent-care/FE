@@ -85,7 +85,7 @@ const ProfilePage = () => {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-pink-50 via-orange-50 to-purple-100 py-12">
+    <main className="min-h-screen bg-gradient-to-br from-pink-50 via-orange-50 to-purple-100 py-32">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-800">Profil Pengguna</h1>

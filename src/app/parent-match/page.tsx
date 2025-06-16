@@ -9,7 +9,7 @@ const ParentMatchPage = () => {
 
   if (showQuiz) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-orange-50 via-pink-50 to-purple-50 py-8">
+      <main className="min-h-screen bg-gradient-to-br from-orange-50 via-pink-50 to-purple-50 py-32">
         <div className="container mx-auto px-4">
           {/* Header */}
           <div className="text-center mb-8">
