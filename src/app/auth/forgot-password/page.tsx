@@ -8,17 +8,34 @@ export default function ForgotPasswordPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsSubmitted(true);
-      console.log('Password reset email sent to:', email);
-    }, 2000);
-  };
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsLoading(true);
+
+  try {
+    const res = await fetch('https://be-production-0885.up.railway.app/api/auth/forgot-password', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message || 'Gagal mengirim email reset');
+    }
+
+    setIsSubmitted(true);
+    console.log('✅ Email reset dikirim ke:', email);
+  } catch (err: any) {
+    alert(`❌ ${err.message}`);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   const handleResend = () => {
     setIsSubmitted(false);
