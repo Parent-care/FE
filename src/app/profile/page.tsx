@@ -70,7 +70,7 @@ const ProfilePage = () => {
       console.log(data);
       setStatusMessage('Profil berhasil diperbarui');
       setIsEditing(false);
-      window.location.href = '/About';
+      window.location.href = '/profile';
     } catch (error) {
       console.error('Request gagal', error);
       setStatusMessage('Gagal menyimpan data');
