@@ -1,16 +1,11 @@
 'use client';
 
+import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
-type PageProps = {
-  params: {
-    token: string;
-  };
-};
-
-export default function ResetPasswordPage({ params }: PageProps) {
-  const { token } = params;
+export default function ResetPasswordPage() {
+  const params = useParams();
+  const token = params.token as string;
   const router = useRouter();
 
   const [password, setPassword] = useState('');
@@ -42,11 +37,8 @@ export default function ResetPasswordPage({ params }: PageProps) {
       setSuccess(true);
       setTimeout(() => router.push('/auth/login'), 3000);
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('Terjadi kesalahan tak dikenal');
-      }
+      if (err instanceof Error) setError(err.message);
+      else setError('Terjadi kesalahan tak dikenal');
     } finally {
       setLoading(false);
     }
