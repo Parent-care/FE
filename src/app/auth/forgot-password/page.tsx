@@ -29,14 +29,15 @@ export default function ForgotPasswordPage() {
 
     setIsSubmitted(true);
     console.log('✅ Email reset dikirim ke:', email);
-  } catch (err: any) {
+} catch (err: unknown) {
+  if (err instanceof Error) {
     alert(`❌ ${err.message}`);
-  } finally {
-    setIsLoading(false);
+  } else {
+    alert('❌ Terjadi kesalahan tak dikenal');
   }
+}
+
 };
-
-
   const handleResend = () => {
     setIsSubmitted(false);
     setEmail('');

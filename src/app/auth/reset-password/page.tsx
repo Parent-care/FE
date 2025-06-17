@@ -37,11 +37,14 @@ export default function ResetPasswordPage({ params }: { params: { token: string 
 
       setSuccess(true);
       setTimeout(() => router.push('/auth/login'), 3000); // Redirect ke login setelah 3 detik
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+} catch (err: unknown) {
+  if (err instanceof Error) {
+    setError(err.message);
+  } else {
+    setError('Terjadi kesalahan tak dikenal');
+  }
+}
+
   };
 
   return (
