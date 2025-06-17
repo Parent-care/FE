@@ -77,7 +77,10 @@ const Navbar = () => {
         {/* Hamburger */}
         <button
           className="md:hidden block text-gray-800 focus:outline-none"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={(e) => {
+    e.stopPropagation(); // 👈 tambahkan ini agar klik tidak ditangkap event luar
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  }}
         >
           <svg
             className="w-6 h-6"
