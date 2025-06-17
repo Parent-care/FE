@@ -60,6 +60,7 @@ export default function RegisterPage() {
         password: '',
         confirmPassword: ''
       });
+      window.location.href = '/auth/login';
     }
   } catch (error) {
     console.error(error);
